@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import s from './SuperInput.module.css'
 
-export type SuperInputPropsType = {
+type SuperInputPropsType = {
     name: string
     value: number
     type: string

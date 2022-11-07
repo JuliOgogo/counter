@@ -43,13 +43,13 @@ export const Settings: React.FC<SettingsPropsType> = ({
     return <div className={s.settingsDisplay}>
         <div className={s.inputs}>
             <SuperInput
-                name={'max value'}
+                name={'max value:'}
                 value={maxValue}
                 type={'number'}
                 callBack={onChangeMaxValueHandler}
             />
             <SuperInput
-                name={'start value'}
+                name={'start value:'}
                 value={startValue}
                 type={'number'}
                 callBack={onChangeStartValueHandler}
