@@ -1,13 +1,14 @@
+import React from 'react';
 import s from './Counter.module.css';
-import {Button} from "./Button";
+import {SuperButton} from "./SuperButton";
 import {Display} from "./Display";
 
 type CounterPropsType = {
-    counter: number,
-    counterIncrements: () => void,
-    counterResets: () => void,
-    min: number,
-    max: number
+    counter: number
+    maxValue: number
+    startValue: number
+    counterIncrements: () => void
+    counterResets: () => void
 }
 
 export const Counter = (props: CounterPropsType) => {
@@ -23,26 +24,24 @@ export const Counter = (props: CounterPropsType) => {
     return (
         <div className={s.counter}>
 
-            <Display min={props.min}
-                     max={props.max}
-                     counter={props.counter}
+            <Display
+                min={props.startValue}
+                max={props.maxValue}
+                counter={props.counter}
             />
 
             <div className={s.buttons}>
-                <Button name={'inc'}
-                        callBack={onClickIncHandler}
-                        disabled={props.counter === props.max}
+                <SuperButton
+                    name={'inc'}
+                    callBack={onClickIncHandler}
+                    disabled={props.counter === props.maxValue}
                 />
-                <Button name={'reset'}
-                        callBack={onClickResetHandler}
-                        disabled={props.counter === props.min}
+                <SuperButton
+                    name={'reset'}
+                    callBack={onClickResetHandler}
+                    disabled={props.counter === props.startValue}
                 />
             </div>
         </div>
     );
 }
-
-/*<div className={props.counter === props.max ? `${s.error} ${s.number}` : s.number}><h2>{props.counter}</h2></div>*/
-
-/*<button onClick={onClickIncHandler} disabled={props.counter === 5} className={s.button}>inc</button>
-  <button onClick={onClickResetHandler} disabled={props.counter === 0} className={s.button}>reset</button>*/

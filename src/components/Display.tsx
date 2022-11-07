@@ -1,8 +1,9 @@
+import React from 'react';
 import s from "./Counter.module.css";
 
 type DisplayPropsType = {
-    min: number,
-    max: number,
+    min: number
+    max: number
     counter: number
 }
 

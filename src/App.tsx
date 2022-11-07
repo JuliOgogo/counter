@@ -5,17 +5,33 @@ import {Settings} from "./components/Settings";
 
 function App() {
 
-    const [min, setMin] = useState<number>(0)
-    const [max, setMax] = useState<number>(5)
+    const [maxValue, setMaxValue] = useState<number>(() => {
+        let valueAsString = localStorage.getItem("Max Value")
+        if (valueAsString) {
+            let newValue = JSON.parse(valueAsString)
+            return newValue;
+        } else {
+            return 5;
+        }
+    })
 
-    const changeStartValue = (startValue: number) => {
-        setMin(startValue)
-        setCounter(startValue)
-    }
+    useEffect(() => {
+        localStorage.setItem("Max Value", JSON.stringify(maxValue))
+    }, [maxValue])
 
-    const changeMaxValue = (maxValue: number) => {
-        setMax(maxValue)
-    }
+    const [startValue, setStartValue] = useState<number>(() => {
+        let valueAsString = localStorage.getItem("Start Value")
+        if (valueAsString) {
+            let newValue = JSON.parse(valueAsString)
+            return newValue;
+        } else {
+            return 0;
+        }
+    })
+
+    useEffect(() => {
+        localStorage.setItem("Start Value", JSON.stringify(startValue))
+    }, [startValue])
 
     const [counter, setCounter] = useState(() => {
         let valueAsString = localStorage.getItem("Counter Value")
@@ -31,31 +47,40 @@ function App() {
         localStorage.setItem("Counter Value", JSON.stringify(counter))
     }, [counter])
 
+    const changeStartValue = (startValue: number) => {
+        setStartValue(startValue)
+        setCounter(startValue)
+    }
+
+    const changeMaxValue = (maxValue: number) => {
+        setMaxValue(maxValue)
+    }
+
     const counterIncrements = () => {
-        if (counter < max) {
+        if (counter < maxValue) {
             setCounter(counter + 1);
         }
-        console.log(counter);
     }
 
     const counterResets = () => {
-        setCounter(min);
-        console.log(counter);
+        setCounter(startValue);
     }
 
-    return (
-        <div className="App">
-            <Settings changeStartValue={changeStartValue}
-                      changeMaxValue={changeMaxValue}
+    return <div className="App">
+            <Settings
+                maxValue={maxValue}
+                startValue={startValue}
+                changeMaxValue={changeMaxValue}
+                changeStartValue={changeStartValue}
             />
-            <Counter counter={counter}
-                     counterIncrements={counterIncrements}
-                     counterResets={counterResets}
-                     min={min}
-                     max={max}
+            <Counter
+                counter={counter}
+                maxValue={maxValue}
+                startValue={startValue}
+                counterIncrements={counterIncrements}
+                counterResets={counterResets}
             />
         </div>
-    );
 }
 
 export default App;

@@ -20,13 +20,7 @@
     border-radius: 10px;
 }
 
-.inputItem {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.buttonItem {
+.button {
     display: flex;
     align-items: center;
     justify-content: space-around;
