@@ -1,17 +1,27 @@
+import s from './Button.module.css'
+import React from "react";
+
 type ButtonPropsType = {
     name: string,
     callBack: () => void,
     disabled: boolean,
-    classes: string
+    className?: string
 }
 
-export const Button = (props: ButtonPropsType) => {
+export const Button: React.FC<ButtonPropsType> = ({name,
+                                                      callBack,
+                                                      disabled,
+                                                      className}) => {
+
+    const onClickHandler = () => {
+        callBack()
+    }
 
     return (
         <button
-            onClick={props.callBack}
-            disabled={props.disabled}
-            className={props.classes}
-        >{props.name}</button>
+            onClick={onClickHandler}
+            disabled={disabled}
+            className={s.button}
+        >{name}</button>
     );
 }

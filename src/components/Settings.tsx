@@ -1,5 +1,6 @@
 import s from './Settings.module.css';
 import React, {ChangeEvent, useEffect, useState} from "react";
+import {Button} from "./Button";
 
 type SettingsPropsType = {
     changeStartValue: (startValue: number) => void
@@ -67,9 +68,21 @@ export const Settings = (props: SettingsPropsType) => {
 
     return (
         <div className={s.settingsDisplay}>
-            <h3>max value:</h3> <input value={maxValue} onChange={onChangeMaxValueHandler}/>
-            <h3>start value:</h3> <input value={startValue} onChange={onChangeStartValueHandler}/>
-            <button onClick={onClickHandler}>set</button>
+            <div className={s.inputs}>
+                <div className={s.inputItem}>
+                    <h3>max value:</h3>
+                    <input value={maxValue} onChange={onChangeMaxValueHandler}/>
+                </div>
+                <div className={s.inputItem}>
+                    <h3>start value:</h3>
+                    <input value={startValue} onChange={onChangeStartValueHandler}/>
+                </div>
+            </div>
+            <div className={s.buttonItem}>
+                <Button name={'set'}
+                        callBack={onClickHandler}
+                        disabled={false}/>
+            </div>
         </div>
     );
 }

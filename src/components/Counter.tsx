@@ -29,15 +29,13 @@ export const Counter = (props: CounterPropsType) => {
             />
 
             <div className={s.buttons}>
-                <Button name={"inc"}
+                <Button name={'inc'}
                         callBack={onClickIncHandler}
                         disabled={props.counter === props.max}
-                        classes={s.button}
                 />
-                <Button name={"reset"}
+                <Button name={'reset'}
                         callBack={onClickResetHandler}
                         disabled={props.counter === props.min}
-                        classes={s.button}
                 />
             </div>
         </div>

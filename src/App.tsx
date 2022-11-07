@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Counter} from "./components/Counter";
 import {Settings} from "./components/Settings";
@@ -16,9 +16,6 @@ function App() {
     const changeMaxValue = (maxValue: number) => {
         setMax(maxValue)
     }
-
-    /*const min = 0;
-    const max = 5;*/
 
     const [counter, setCounter] = useState(() => {
         let valueAsString = localStorage.getItem("Counter Value")

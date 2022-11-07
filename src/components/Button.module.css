@@ -1,0 +1,18 @@
+.button {
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    width: 140px;
+    height: 70px;
+    background: lightpink;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.button:hover {
+    background: hotpink;
+}
+
+.button:disabled {
+    background: lightpink;
+}
