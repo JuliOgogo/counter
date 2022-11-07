@@ -19,7 +19,7 @@ export const Settings: React.FC<SettingsPropsType> = ({
 
     const onChangeMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.valueAsNumber
-        if (value === startValue) {
+        if (value === startValue || value < startValue) {
             throw new Error('Error')
         } else {
             changeMaxValue(value)
@@ -28,7 +28,7 @@ export const Settings: React.FC<SettingsPropsType> = ({
 
     const onChangeStartValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.valueAsNumber
-        if (value >= 0) {
+        if (value >= 0 && value < maxValue) {
             changeStartValue(value)
         } else {
             throw new Error('Error')
