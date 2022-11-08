@@ -1,0 +1,24 @@
+.displayWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 150px;
+    background-color: pink;
+    border-radius: 10px;
+
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.number {
+}
+
+.text {
+    padding: 70px;
+}
+
+.error {
+    color: red;
+    font-size: 40px;
+}

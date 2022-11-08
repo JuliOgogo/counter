@@ -8,50 +8,43 @@ type SettingsPropsType = {
     startValue: number
     changeMaxValue: (maxValue: number) => void
     changeStartValue: (startValue: number) => void
+    setSettings: () => void
+    error: string
 }
 
 export const Settings: React.FC<SettingsPropsType> = ({
                                                           maxValue,
                                                           startValue,
                                                           changeMaxValue,
-                                                          changeStartValue
+                                                          changeStartValue,
+                                                          setSettings,
+                                                          error
                                                       }) => {
 
     const onChangeMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.valueAsNumber
-        if (value === startValue || value < startValue) {
-            throw new Error('Error')
-        } else {
-            changeMaxValue(value)
-        }
+        changeMaxValue(value)
     }
 
     const onChangeStartValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.valueAsNumber
-        if (value >= 0 && value < maxValue) {
-            changeStartValue(value)
-        } else {
-            throw new Error('Error')
-        }
+        changeStartValue(value)
     }
 
     const onClickHandler = () => {
-        changeStartValue(startValue)
-        changeMaxValue(maxValue)
+        setSettings()
     }
 
-    return <div className={s.settingsDisplay}>
+    return <div className={s.settingsWrapper}>
         <div className={s.inputs}>
             <SuperInput
                 name={'max value:'}
                 value={maxValue}
-                type={'number'}
                 callBack={onChangeMaxValueHandler}
             />
             <SuperInput
                 name={'start value:'}
                 value={startValue}
-                type={'number'}
                 callBack={onChangeStartValueHandler}
             />
         </div>
@@ -59,7 +52,7 @@ export const Settings: React.FC<SettingsPropsType> = ({
             <SuperButton
                 name={'set'}
                 callBack={onClickHandler}
-                disabled={false}
+                disabled={error === 'Incorrect value!'}
             />
         </div>
     </div>

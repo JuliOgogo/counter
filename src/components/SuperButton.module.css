@@ -1,4 +1,4 @@
-button {
+.button {
     cursor: pointer;
     border: none;
     border-radius: 10px;
@@ -9,10 +9,10 @@ button {
     font-weight: bold;
 }
 
-button:hover {
+.button:hover {
     background: hotpink;
 }
 
-button:disabled {
+.button:disabled {
     background: lightpink;
 }

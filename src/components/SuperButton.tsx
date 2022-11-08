@@ -1,17 +1,17 @@
 import React from "react";
-import './SuperButton.css'
+import s from './SuperButton.module.css'
 
-type ButtonPropsType = {
+type SuperButtonPropsType = {
     name: string
     callBack: () => void
-    disabled: boolean
+    disabled?: boolean
 }
 
-export const SuperButton: React.FC<ButtonPropsType> = ({
-                                                           name,
-                                                           callBack,
-                                                           disabled
-                                                       }) => {
+export const SuperButton: React.FC<SuperButtonPropsType> = ({
+                                                                name,
+                                                                callBack,
+                                                                disabled
+                                                            }) => {
 
     const onClickHandler = () => {
         callBack()
@@ -20,6 +20,7 @@ export const SuperButton: React.FC<ButtonPropsType> = ({
     return <button
         onClick={onClickHandler}
         disabled={disabled}
+        className={s.button}
     >{name}
     </button>
 }

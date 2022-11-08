@@ -47,13 +47,24 @@ function App() {
         localStorage.setItem("Counter Value", JSON.stringify(counter))
     }, [counter])
 
+    const [error, setError] = useState<string>('')
+
     const changeStartValue = (startValue: number) => {
-        setStartValue(startValue)
-        setCounter(startValue)
+        if (startValue < 0 || startValue >= maxValue) {
+            setError('Incorrect value!')
+        } else {
+            setError('enter values and press set')
+            setStartValue(startValue)
+        }
     }
 
     const changeMaxValue = (maxValue: number) => {
-        setMaxValue(maxValue)
+        if (maxValue < 0 || maxValue <= startValue) {
+            setError('Incorrect value!')
+        } else {
+            setError('enter values and press set')
+            setMaxValue(maxValue)
+        }
     }
 
     const counterIncrements = () => {
@@ -66,21 +77,29 @@ function App() {
         setCounter(startValue);
     }
 
+    const setSettings = () => {
+        setError('')
+        setCounter(startValue)
+    }
+
     return <div className="App">
-            <Settings
-                maxValue={maxValue}
-                startValue={startValue}
-                changeMaxValue={changeMaxValue}
-                changeStartValue={changeStartValue}
-            />
-            <Counter
-                counter={counter}
-                maxValue={maxValue}
-                startValue={startValue}
-                counterIncrements={counterIncrements}
-                counterResets={counterResets}
-            />
-        </div>
+        <Settings
+            maxValue={maxValue}
+            startValue={startValue}
+            changeMaxValue={changeMaxValue}
+            changeStartValue={changeStartValue}
+            setSettings={setSettings}
+            error={error}
+        />
+        <Counter
+            counter={counter}
+            maxValue={maxValue}
+            startValue={startValue}
+            counterIncrements={counterIncrements}
+            counterResets={counterResets}
+            error={error}
+        />
+    </div>
 }
 
 export default App;

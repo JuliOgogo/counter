@@ -9,6 +9,7 @@ type CounterPropsType = {
     startValue: number
     counterIncrements: () => void
     counterResets: () => void
+    error: string
 }
 
 export const Counter = (props: CounterPropsType) => {
@@ -21,27 +22,26 @@ export const Counter = (props: CounterPropsType) => {
         props.counterResets();
     }
 
-    return (
-        <div className={s.counter}>
+    const disabled = props.counter === props.maxValue || props.error === 'Incorrect value!'
 
-            <Display
-                min={props.startValue}
-                max={props.maxValue}
-                counter={props.counter}
+    return <div className={s.counterWrapper}>
+        <Display
+            startValue={props.startValue}
+            maxValue={props.maxValue}
+            counter={props.counter}
+            error={props.error}
+        />
+        <div className={s.buttons}>
+            <SuperButton
+                name={'inc'}
+                callBack={onClickIncHandler}
+                disabled={disabled}
             />
-
-            <div className={s.buttons}>
-                <SuperButton
-                    name={'inc'}
-                    callBack={onClickIncHandler}
-                    disabled={props.counter === props.maxValue}
-                />
-                <SuperButton
-                    name={'reset'}
-                    callBack={onClickResetHandler}
-                    disabled={props.counter === props.startValue}
-                />
-            </div>
+            <SuperButton
+                name={'reset'}
+                callBack={onClickResetHandler}
+                disabled={props.error === 'Incorrect value!'}
+            />
         </div>
-    );
+    </div>
 }
