@@ -5,14 +5,13 @@ import {Settings} from "./components/Settings";
 
 function App() {
 
+    const getValueLS = (key: string, defValue: number): number => {
+        let valueAsString = localStorage.getItem(key)
+        return valueAsString ? JSON.parse(valueAsString) : defValue
+    }
+
     const [maxValue, setMaxValue] = useState<number>(() => {
-        let valueAsString = localStorage.getItem("Max Value")
-        if (valueAsString) {
-            let newValue = JSON.parse(valueAsString)
-            return newValue;
-        } else {
-            return 5;
-        }
+        return getValueLS("Max Value", 5)
     })
 
     useEffect(() => {
@@ -20,13 +19,7 @@ function App() {
     }, [maxValue])
 
     const [startValue, setStartValue] = useState<number>(() => {
-        let valueAsString = localStorage.getItem("Start Value")
-        if (valueAsString) {
-            let newValue = JSON.parse(valueAsString)
-            return newValue;
-        } else {
-            return 0;
-        }
+        return getValueLS("Start Value", 0)
     })
 
     useEffect(() => {
@@ -34,13 +27,7 @@ function App() {
     }, [startValue])
 
     const [counter, setCounter] = useState(() => {
-        let valueAsString = localStorage.getItem("Counter Value")
-        if (valueAsString) {
-            let newValue = JSON.parse(valueAsString)
-            return newValue;
-        } else {
-            return 0;
-        }
+        return getValueLS("Counter Value", 0)
     });
 
     useEffect(() => {
@@ -48,28 +35,29 @@ function App() {
     }, [counter])
 
     const [displayText, setDisplayText] = useState<string>('enter values and press set')
-
     const [error, setError] = useState<boolean>(false)
+    const [isSetting, setIsSetting] = useState<boolean>(false)
 
     const changeStartValue = (startValue: number) => {
+        setStartValue(startValue)
+        setIsSetting(true);
         if (startValue < 0 || startValue >= maxValue) {
             setDisplayText('Incorrect value!')
             setError(true)
         } else {
             setDisplayText('enter values and press set')
             setError(false)
-            setStartValue(startValue)
         }
     }
 
     const changeMaxValue = (maxValue: number) => {
+        setMaxValue(maxValue)
         if (maxValue < 0 || maxValue <= startValue) {
             setDisplayText('Incorrect value!')
             setError(true)
         } else {
             setDisplayText('enter values and press set')
             setError(false)
-            setMaxValue(maxValue)
         }
     }
 
@@ -86,6 +74,7 @@ function App() {
     const setSettings = () => {
         setDisplayText('')
         setCounter(startValue)
+        setIsSetting(false)
     }
 
     return <div className="App">
@@ -96,6 +85,7 @@ function App() {
             changeStartValue={changeStartValue}
             setSettings={setSettings}
             error={error}
+            isSetting={isSetting}
         />
         <Counter
             counter={counter}
