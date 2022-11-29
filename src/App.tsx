@@ -28,7 +28,7 @@ function App() {
 
     const [counter, setCounter] = useState(() => {
         return getValueLS("Counter Value", 0)
-    });
+    })
 
     useEffect(() => {
         localStorage.setItem("Counter Value", JSON.stringify(counter))
@@ -40,7 +40,7 @@ function App() {
 
     const changeStartValue = (startValue: number) => {
         setStartValue(startValue)
-        setIsSetting(true);
+        setIsSetting(true)
         if (startValue < 0 || startValue >= maxValue) {
             setDisplayText('Incorrect value!')
             setError(true)
@@ -52,6 +52,7 @@ function App() {
 
     const changeMaxValue = (maxValue: number) => {
         setMaxValue(maxValue)
+        setIsSetting(true)
         if (maxValue < 0 || maxValue <= startValue) {
             setDisplayText('Incorrect value!')
             setError(true)
