@@ -9,7 +9,7 @@ type SettingsPropsType = {
     changeMaxValue: (maxValue: number) => void
     changeStartValue: (startValue: number) => void
     setSettings: () => void
-    error: string
+    error: boolean
 }
 
 export const Settings: React.FC<SettingsPropsType> = ({
@@ -41,18 +41,20 @@ export const Settings: React.FC<SettingsPropsType> = ({
                 name={'max value:'}
                 value={maxValue}
                 callBack={onChangeMaxValueHandler}
+                error={error}
             />
             <SuperInput
                 name={'start value:'}
                 value={startValue}
                 callBack={onChangeStartValueHandler}
+                error={error}
             />
         </div>
         <div className={s.button}>
             <SuperButton
                 name={'set'}
                 callBack={onClickHandler}
-                disabled={error === 'Incorrect value!'}
+                disabled={error}
             />
         </div>
     </div>

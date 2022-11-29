@@ -16,3 +16,7 @@
     font-size: large;
     padding-left: 25px;
 }
+
+.error {
+    border: 2px solid red;
+}

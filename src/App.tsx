@@ -47,38 +47,44 @@ function App() {
         localStorage.setItem("Counter Value", JSON.stringify(counter))
     }, [counter])
 
-    const [error, setError] = useState<string>('')
+    const [displayText, setDisplayText] = useState<string>('enter values and press set')
+
+    const [error, setError] = useState<boolean>(false)
 
     const changeStartValue = (startValue: number) => {
         if (startValue < 0 || startValue >= maxValue) {
-            setError('Incorrect value!')
+            setDisplayText('Incorrect value!')
+            setError(true)
         } else {
-            setError('enter values and press set')
+            setDisplayText('enter values and press set')
+            setError(false)
             setStartValue(startValue)
         }
     }
 
     const changeMaxValue = (maxValue: number) => {
         if (maxValue < 0 || maxValue <= startValue) {
-            setError('Incorrect value!')
+            setDisplayText('Incorrect value!')
+            setError(true)
         } else {
-            setError('enter values and press set')
+            setDisplayText('enter values and press set')
+            setError(false)
             setMaxValue(maxValue)
         }
     }
 
     const counterIncrements = () => {
         if (counter < maxValue) {
-            setCounter(counter + 1);
+            setCounter(counter + 1)
         }
     }
 
     const counterResets = () => {
-        setCounter(startValue);
+        setCounter(startValue)
     }
 
     const setSettings = () => {
-        setError('')
+        setDisplayText('')
         setCounter(startValue)
     }
 
@@ -97,7 +103,7 @@ function App() {
             startValue={startValue}
             counterIncrements={counterIncrements}
             counterResets={counterResets}
-            error={error}
+            displayText={displayText}
         />
     </div>
 }
